@@ -99,5 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Manually added ignores
+*.hdf5
 *.h5
 *.csv
