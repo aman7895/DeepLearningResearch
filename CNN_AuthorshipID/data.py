@@ -46,7 +46,9 @@ def getCharAuthorData(authors, doc, documentTable = 'aman_content', chunk_size =
                 else:
                     query = query + ", " + str(doc_id)
             query = query + ") ;"
+            
             cur.execute(query)
+            print(query)
             print("Execution completed")
             rows = cur.fetchall()
             

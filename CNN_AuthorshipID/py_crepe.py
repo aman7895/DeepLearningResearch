@@ -27,7 +27,8 @@ def build_model(classes, filter_kernels, dense_outputs, maxlen, vocab_size, nb_f
     model.add(Convolution1D(nb_filter=nb_filter, filter_length=filter_kernels[1],
                          border_mode='valid', activation='relu',
                          input_shape=(maxlen, vocab_size), name = 'conv2'))
-    model.add(MaxPooling1D(pool_length=3, name = 'maxpool2))
+    model.add(MaxPooling1D(pool_length=3, name = 'maxpool2'))
+    
     
     model.add(Convolution1D(nb_filter=nb_filter, filter_length=filter_kernels[2],
                          border_mode='valid', activation='relu',

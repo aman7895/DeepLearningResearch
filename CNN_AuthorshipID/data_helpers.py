@@ -10,10 +10,15 @@ import pandas as pd
 # In[2]:
 
 # This function is called from Main and expects train and test values for x and y
-def load_ag_data(authors = None, docID = None): 
-    
-    import data
-    train = data.getCharAuthorData(authors, docID) #Pass it to data and it returns a data frame
+
+
+def load_ag_data(authors = None, docID = None, tdoc = None): 
+#def load_ag_data(authors = None, docID = None): 
+
+    import fixeddocdata
+    #import data
+    train = fixeddocdata.getCharAuthorData(authors, docID, tdoc)
+    #train = fixeddocdata.getCharAuthorData(authors, docID) #Pass it to data and it returns a data frame
     train = train.dropna()
 
     labels = [] #
@@ -101,13 +106,14 @@ def encode_data(x, maxlen, vocab, vocab_size, check):
     #In this case that will be 1014x69. This is then placed in a 3D matrix of size
     #data_samples x maxlen x vocab_size. Each character is encoded into a one-hot
     #array. Chars not in the vocab are encoded into an all zero vector.
-
+    
     input_data = np.zeros((len(x), maxlen, vocab_size))
     for dix, sent in enumerate(x):
         counter = 0
         sent_array = np.zeros((maxlen, vocab_size))
         chars = list(sent.replace(' ', ''))
         for c in chars:
+            #c = c.lower()
             if counter >= maxlen:
                 pass
             else:
@@ -129,10 +135,23 @@ def create_vocab_set():
     import string
     unicode_characters = [];
     #initially 1280
-    for k in range(0, 500):
-        unicode_characters.append(unichr(k))
+    
+    for k in range(0, 255):
+        unicode_characters.append( unichr(k) )
+    '''
+    
+    for k in range(32,65):
+        unicode_characters.append( unichr(k) )
+    for k in range(91, 127):
+        unicode_characters.append( unichr(k) )
+    
+    for k in range(224, 256):
+        unicode_characters.append( unichr(k) )
+    '''
+    #for k in range(256, 384):
+        #unicode_characters.append( unichr(k))
         
-    #or k in range(1024, 1280):
+    #for k in range(1024, 1280):
         #unicode_characters.append(unichr(k))
 
 
